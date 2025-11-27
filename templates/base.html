@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title }} – VirusVision</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav>
+    <div><strong style="font-size: 20px">🧬 VirusVision</strong></div>
+    <div style="font-size: 20px">
+      <a href="/">Home</a>
+      <a href="/pe">PE Scanner</a>
+      <a href="/url">URL Scanner</a>
+      <a href="/exit">Exit</a>
+    </div>
+  </nav>
+
+  {% block content %}{% endblock %}
+</body>
+</html>

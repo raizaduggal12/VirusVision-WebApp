@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<section style="
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: white;
+">
+  <h1 style="color: rgb(3, 193, 236);">Welcome to VirusVision</h1> <br>
+  <p style="color: white; font-size: 25px;">Fast, reliable malware & URL detection powered by AI.</p>
+  <a href="{{ url_for('menu') }}" role="button" style="
+    background-color: #238636;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 1rem;
+  ">
+    Start to Detect
+  </a>
+</section>
+
+{% endblock %}

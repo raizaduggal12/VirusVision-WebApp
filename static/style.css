@@ -1,0 +1,202 @@
+/* ---------- GLOBAL THEME ---------- */
+body {
+  background-color: #0d1117;
+  color: #c9d1d9;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* 🔥 full viewport height */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- NAVBAR ---------- */
+nav {
+  background-color: #161b22;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #30363d;
+}
+
+nav a {
+  color: #58a6ff;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #79c0ff;
+}
+
+/* ---------- MAIN CONTAINER ---------- */
+main.container {
+  flex: 1; /* fills the rest of the screen */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically center */
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+  padding: 2rem;
+  background-color: #161b22;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  min-height: 85vh; /* 🔥 ensures almost full height */
+}
+
+/* ---------- HEADINGS ---------- */
+h1, h2, h3 {
+  color: #58a6ff;
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+/* ---------- INPUTS & BUTTONS ---------- */
+/* ---------- INPUTS & BUTTONS ---------- */
+form {
+  display: flex;
+  flex-direction: column; /* Stack vertically by default */
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Make the URL form display input + button in one line */
+#urlForm {
+  flex-direction: row; /* ✅ input + button side by side */
+}
+
+input[type="file"],
+input[type="text"] {
+  width: 400px; /* consistent input size */
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  display: inline-block;
+}
+
+button,
+input[type="submit"] {
+  background-color: #238636;
+   color: white;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 40%; /* 🔥 reduce from 60–100% to desired width */
+  margin: 10px auto;
+  display: block;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #2ea043;
+}
+
+
+button,
+input[type="submit"] {
+  background-color: #238636;
+  color: white;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 50%;
+  margin: 0.5rem auto;
+  display: block;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #2ea043;
+}
+
+/* ---------- RESULT BOX ---------- */
+pre {
+  background: #0d1117;
+  padding: 1.2rem;
+  border-radius: 8px;
+  color: #79c0ff;
+  width: 80%;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+/* ---------- FOOTER (OPTIONAL) ---------- */
+footer {
+  background-color: #161b22;
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid #30363d;
+  color: #8b949e;
+}
+
+/* ---------- PE File Form Layout ---------- */
+#peForm {
+  display: flex;
+  flex-direction: row;       /* Align file input + button side by side */
+  align-items: center;       /* Vertically center both elements */
+  justify-content: center;
+  gap: 5rem;                 /* Space between input and button */
+}
+
+/* Custom File Input Styling */
+input[type="file"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  padding: 0.7rem;
+  border-radius: 6px;
+  width: 350px;             /* Match width with design */
+  height: 45px;             /* 🔥 Same height as button */
+  cursor: pointer;
+  display: inline-block;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: #238636;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-right: 10px;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #2ea043;
+}
+
+/* PE Form Submit Button */
+#peForm button {
+  background-color: #238636;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  height: 45px;             /* ✅ Perfectly aligned with file input */
+}
+
+#peForm button:hover {
+  background-color: #2ea043;
+}
+

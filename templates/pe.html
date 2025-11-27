@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container">
+  <h2 >🔍 PE File Scanner</h2>
+
+  <form action="{{ url_for('scan_pe') }}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".exe" required>
+    <button type="submit">Scan File</button>
+  </form>
+
+  {% if result %}
+  <pre>{{ result }}</pre>
+  {% endif %}
+
+  <br>
+  <!-- ✅ Added back buttons -->
+  <div style="text-align: center;">
+  <a href="{{ url_for('menu') }}" class="button secondary" style="color: white;">⬅ Back to Menu</a> <br><br>
+  <a href="{{ url_for('home') }}" class="button secondary" style="color: white;">🏠 Back to Home</a>
+</div>
+
+</main>
+{% endblock %}
