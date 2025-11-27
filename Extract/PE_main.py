@@ -119,10 +119,12 @@ def extract_infos(fpath):
     res['SectionsMinRawsize'] = min(raw_sizes)
     res['SectionsMaxRawsize'] = max(raw_sizes)
 
+
     virtual_sizes = [s.Misc_VirtualSize for s in pe.sections]
     res['SectionsMeanVirtualsize'] = sum(virtual_sizes) / len(virtual_sizes)
     res['SectionsMinVirtualsize'] = min(virtual_sizes)
     res['SectionsMaxVirtualsize'] = max(virtual_sizes)
+
 
     # Imports
     try:
@@ -200,3 +202,15 @@ def predict_pe_from_flask(file_path):
     
     except Exception as e:
         return f"❌ Error during prediction: {e}"
+    
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) < 2:
+        print("⚠️ Please provide a PE file path to scan.")
+        print("Example: python Extract/PE_main.py C:\\Windows\\System32\\notepad.exe")
+    else:
+        file_path = sys.argv[1]
+        result = predict_pe_from_flask(file_path)
+        print(result)
+

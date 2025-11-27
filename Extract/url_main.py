@@ -29,65 +29,46 @@ sys.modules['url_main'].sanitization = sanitization
 
 
 def predict_url_from_flask(url):
-    whitelist = ['hackthebox.eu', 'root-me.org', 'gmail.com']
+    import numpy as np
 
-    base_dir = os.getcwd()  # ensures correct base path on Render
+    whitelist = ['google.com', 'gmail.com', 'hackthebox.eu', 'root-me.org', 'microsoft.com', 'yahoo.com']
+
+    base_dir = os.getcwd()
     model_path = os.path.join(base_dir, "Classifier", "pickel_model.pkl")
     vectorizer_path = os.path.join(base_dir, "Classifier", "pickel_vector.pkl")
 
+    # Re-load model and vectorizer
+    with open(model_path, "rb") as f1:
+        lgr = pickle.load(f1)
+    with open(vectorizer_path, "rb") as f2:
+        vectorizer = pickle.load(f2)
 
+    # Clean the input like during training
+    url_clean = url.strip().lower().replace("https://", "").replace("http://", "").replace("www.", "")
 
-    import builtins, sys, types
-    builtins.sanitization = sanitization
-    sys.modules['__main__'].sanitization = sanitization
-    sys.modules['url_main'] = types.ModuleType('url_main')
-    sys.modules['url_main'].sanitization = sanitization
+    # ✅ Rule 1: Whitelist safe domains
+    if url_clean in whitelist:
+        return f"✅ '{url}' is LEGITIMATE (Whitelisted)."
 
-    # ✅ Always normalize the input — model expects cleaned version
-    url = url.strip().lower()
-    url = url.strip().lower().replace("https://", "").replace("http://", "").replace("www.", "")
-
-    # ✅ Whitelist check
-    if url in whitelist:
-        return f"✅ '{url}' is Legitimate (Whitelisted)."
-
-    # ✅ Always treat “http://” URLs as risky
-    if "http://" in url:
+    # ✅ Rule 2: If it’s plain http — unsafe
+    if url.lower().startswith("http://"):
         return f"⚠️ '{url}' is MALICIOUS (Unsecured HTTP)."
 
-    try:
-        with open(model_path, "rb") as f1:
-            lgr = pickle.load(f1)
-        with open(vectorizer_path, "rb") as f2:
-            vectorizer = pickle.load(f2)
-    except Exception as e:
-        return f"❌ Error loading model: {e}"
+    # Vectorize and predict probability
+    x = vectorizer.transform([url_clean])
+    y_prob = lgr.predict_proba(x)[0]
+    y_pred = lgr.predict(x)[0]
 
-    try:
-        # ✅ Apply the same sanitization tokens
-        # Let vectorizer handle sanitization exactly as during training
-        x = vectorizer.transform([url])
+    prob_malicious = y_prob[1]  # probability model thinks it’s malicious
 
-        y_pred = lgr.predict(x)[0]
-    except Exception as e:
-        return f"❌ Error during prediction: {e}"
-
-    # ✅ Interpret output correctly
-    if str(y_pred).lower() in ["bad", "malicious", "1"]:
-        return f"⚠️ '{url}' is MALICIOUS."
+    # ✅ Rule 3: Confidence threshold
+    if prob_malicious > 0.7:
+        verdict = "⚠️ MALICIOUS"
+    elif prob_malicious < 0.3:
+        verdict = "✅ SAFE"
     else:
-        return f"✅ '{url}' is LEGITIMATE."
+        verdict = "❓ SUSPICIOUS"
 
-    
-if __name__ == "__main__":
-    import sys
+    return f"{verdict} → '{url}' (malicious probability: {prob_malicious:.2f})"
 
-    if len(sys.argv) < 2:
-        print("⚠️ Please provide a URL to scan.")
-        print("Example: python Extract/url_main.py google.com")
-    else:
-        input_url = sys.argv[1]
-        # ✅ Call the function directly (not import again)
-        result = predict_url_from_flask(input_url)
-        print(result)
 
