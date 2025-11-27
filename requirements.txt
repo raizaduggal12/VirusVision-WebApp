@@ -1,8 +1,7 @@
 Flask
+gunicorn
 pefile
 joblib
 scikit-learn
 pandas
 numpy
-
-
