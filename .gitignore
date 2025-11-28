@@ -1,1 +1,24 @@
-venv/ 
+# Python cache and virtual environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+
+# Build and backup files
+*.log
+*.bak
+*.swp
+
+# System and IDE folders
+.DS_Store
+.idea/
+.vscode/
+
+# Model or dataset artifacts
+*.pkl
+*.joblib
+*.h5
+*.csv
+*.xlsx
