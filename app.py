@@ -83,7 +83,9 @@ def scan_url():
         # 🔥 Call the same ML function you verified in terminal
         result = predict_url_from_flask(url)
     except Exception as e:
+        print("🚨 Flask error:", e)  # <== This prints error in Render logs
         result = f"❌ Error during prediction: {e}"
+
 
     return render_template("url.html", title="URL Scanner", result=result)
 
