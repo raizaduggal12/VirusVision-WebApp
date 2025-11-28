@@ -33,9 +33,10 @@ def predict_url_from_flask(url):
 
     whitelist = ['google.com', 'gmail.com', 'hackthebox.eu', 'root-me.org', 'microsoft.com', 'yahoo.com']
 
-    base_dir = os.path.dirname(os.path.dirname(__file__))
+    base_dir = os.getcwd()
     model_path = os.path.join(base_dir, "Classifier", "pickel_model.pkl")
     vectorizer_path = os.path.join(base_dir, "Classifier", "pickel_vector.pkl")
+
 
 
     # Re-load model and vectorizer
